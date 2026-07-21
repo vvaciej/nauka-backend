@@ -26,38 +26,6 @@ export default function Register() {
 		return regex.test(email);
 	};
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-			const response = await fetch('/api/register', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					data: {
-						type: 'node--nauka_backend',
-						attributes: {
-							title: `${firstName} ${lastName}`,
-							field_imie: firstName,
-							field_nazwisko: lastName,
-							field_email: email,
-							field_password: password,
-						},
-        },
-      }),
-    });
-
-      console.log('STATUS', response.status);
-
-      const text = await response.text();
-      console.log(text);
-    } catch (err) {
-      console.error(err);
-    } 
-  };
-
 	const emailValid = validateEmail(email);
 
 	const validatePassword = (password: string) => {
@@ -72,6 +40,49 @@ export default function Register() {
 
 	const formValid =
 		firstName.trim().length >= 2 && lastName.trim().length >= 5 && emailValid && passwordValid && passwordsMatch;
+
+		  const handleSubmit = async (e: React.FormEvent) => {
+				e.preventDefault();
+
+				try {
+					const response = await fetch('/api/register', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							data: {
+								type: 'node--nauka_backend',
+								attributes: {
+									title: `${firstName} ${lastName}`,
+									field_imie: firstName,
+									field_nazwisko: lastName,
+									field_email: email,
+									field_password: password,
+								},
+							},
+						}),	
+					});
+
+					const data = await response.json();
+
+					console.log(data);
+
+					if (response.ok) {
+						setFirstName('');
+						setLastName('');
+						setEmail('');
+						setPassword('');
+						setConfirmPassword('');
+
+						alert('Rejestracja zakończona sukcesem!');
+					} else {
+						alert('Błąd podczas rejestracji.');
+					}
+				} catch (err) {
+					console.error(err);
+				}
+			};
 
 	return (
 		<div className='h-screen flex justify-center items-center bg-black'>
