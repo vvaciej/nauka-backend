@@ -1,5 +1,3 @@
-'use client';
-
 import Header from '../components/HeaderPage';
 import Register from '../components/RegisterForm';
 

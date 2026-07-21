@@ -1,5 +1,3 @@
-'use client'
-
 import Header from '../components/HeaderPage';
 import Login from '../components/LoginForm';
 

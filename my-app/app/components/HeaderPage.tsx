@@ -31,7 +31,7 @@ export default function Header() {
 				<div className='flex gap-6 items-center'>
 					{user ? (
 						<>
-							<p className='font-bold'>{user.email}</p>
+							<Link href={'/user'} className='font-bold'>{user.email}</Link>
 							<button
 								onClick={logoutClick}
 								className='px-4 py-2 rounded-full text-white font-normal hover:bg-white hover:text-red-600 transition-colors duration-100 cursor-pointer'>
