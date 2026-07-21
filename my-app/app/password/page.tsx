@@ -52,27 +52,9 @@ export default function User() {
 		<div className='w-full min-h-screen bg-black flex flex-col gap-24 items-center'>
 			<Header />
 			<div className='w-125 rounded-2xl bg-white p-8 shadow-xl h-max'>
-				<h1 className='text-3xl font-bold text-center text-gray-700 mb-8'>Your informations</h1>
+				<h1 className='text-3xl font-bold text-center text-gray-700 mb-8'>Change your password</h1>
 
 				<form onSubmit={handleSubmit} className='flex flex-col gap-5'>
-					<input
-						value={user.firstName}
-						placeholder='Name'
-						className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
-					/>
-
-					<input
-						value={user.lastName}
-						placeholder='Last Name'
-						className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
-					/>
-
-					<input
-						value={user.email}
-						type='email'
-						placeholder='Your Email'
-						className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
-					/>
 
 					<input
 						type='password'
