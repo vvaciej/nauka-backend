@@ -18,6 +18,8 @@ export default function Register() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 
+	const [loggedIn, setLoggedIn] = useState(false);
+
 	const onlyLetters = (value: string) => {
 		return value.replace(/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\s]/g, '');
 	};
@@ -80,70 +82,86 @@ export default function Register() {
 		}
 	};
 
+	useEffect(() => {
+		const user = localStorage.getItem('user');
+
+		if (user) {
+			setLoggedIn(true);
+		}
+	}, []);
+
 	return (
 		<div className='flex-1 flex justify-center'>
-			<div className='w-125 rounded-2xl bg-white p-8 shadow-xl h-max'>
-				<h1 className='text-3xl font-bold text-center text-gray-700 mb-8'>Create Account</h1>
+			{loggedIn ? (
+				<h1 className='text-white text-3xl'>Jesteś już zalogowany!</h1>
+			) : (
+				<div className='w-125 rounded-2xl bg-white p-8 shadow-xl h-max'>
+					<h1 className='text-3xl font-bold text-center text-gray-700 mb-8'>Create Account</h1>
 
-				<form onSubmit={handleSubmit} className='flex flex-col gap-5'>
-					<input
-						type='text'
-						placeholder='First Name'
-						value={firstName}
-						onChange={e => setFirstName(onlyLetters(e.target.value))}
-						maxLength={15}
-						className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
-					/>
+					<form onSubmit={handleSubmit} className='flex flex-col gap-5'>
+						<input
+							type='text'
+							placeholder='First Name'
+							value={firstName}
+							onChange={e => setFirstName(onlyLetters(e.target.value))}
+							maxLength={15}
+							className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
+						/>
 
-					<input
-						type='text'
-						placeholder='Last Name'
-						value={lastName}
-						onChange={e => setLastName(onlyLetters(e.target.value))}
-						maxLength={30}
-						className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
-					/>
+						<input
+							type='text'
+							placeholder='Last Name'
+							value={lastName}
+							onChange={e => setLastName(onlyLetters(e.target.value))}
+							maxLength={30}
+							className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
+						/>
 
-					<input
-						type='email'
-						placeholder='Email'
-						value={email}
-						onChange={e => setEmail(e.target.value)}
-						className={`border rounded-lg px-4 py-3 text-gray-700 outline-none ${
-							email.length === 0 ? 'border-gray-300' : emailValid ? 'border-green-500' : 'border-red-500'
-						}`}
-					/>
+						<input
+							type='email'
+							placeholder='Email'
+							value={email}
+							onChange={e => setEmail(e.target.value)}
+							className={`border rounded-lg px-4 py-3 text-gray-700 outline-none ${
+								email.length === 0 ? 'border-gray-300' : emailValid ? 'border-green-500' : 'border-red-500'
+							}`}
+						/>
 
-					<input
-						type='password'
-						placeholder='Password'
-						value={password}
-						onChange={e => setPassword(e.target.value)}
-						className={`border rounded-lg px-4 py-3 text-gray-700 outline-none ${
-							password.length === 0 ? 'border-gray-300' : passwordValid ? 'border-green-500' : 'border-red-500'
-						}`}
-					/>
+						<input
+							type='password'
+							placeholder='Password'
+							value={password}
+							onChange={e => setPassword(e.target.value)}
+							className={`border rounded-lg px-4 py-3 text-gray-700 outline-none ${
+								password.length === 0 ? 'border-gray-300' : passwordValid ? 'border-green-500' : 'border-red-500'
+							}`}
+						/>
 
-					<input
-						type='password'
-						placeholder='Confirm Password'
-						value={confirmPassword}
-						onChange={e => setConfirmPassword(e.target.value)}
-						className={`border rounded-lg px-4 py-3 text-gray-700 outline-none ${
-							confirmPassword.length === 0 ? 'border-gray-300' : passwordsMatch ? 'border-green-500' : 'border-red-500'
-						}`}
-					/>
+						<input
+							type='password'
+							placeholder='Confirm Password'
+							value={confirmPassword}
+							onChange={e => setConfirmPassword(e.target.value)}
+							className={`border rounded-lg px-4 py-3 text-gray-700 outline-none ${
+								confirmPassword.length === 0
+									? 'border-gray-300'
+									: passwordsMatch
+										? 'border-green-500'
+										: 'border-red-500'
+							}`}
+						/>
 
-					<button
-						type='submit'
-						disabled={!formValid}
-						className={`mt-4 rounded-lg py-3 text-white font-semibold transition-colors ${
-							formValid ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed'
-						}`}>
-						Register
-					</button>
-				</form>
-			</div>
+						<button
+							type='submit'
+							disabled={!formValid}
+							className={`mt-4 rounded-lg py-3 text-white font-semibold transition-colors ${
+								formValid ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed'
+							}`}>
+							Register
+						</button>
+					</form>
+				</div>
+			)}
 		</div>
 	);
 }
