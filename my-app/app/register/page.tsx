@@ -73,7 +73,7 @@ export default function Register() {
 						setConfirmPassword('');
 
 						alert('Rejestracja zakończona sukcesem!');
-						router.push('/');
+						router.push('/login');
 					} else {
 						alert('Błąd podczas rejestracji.');
 					}
