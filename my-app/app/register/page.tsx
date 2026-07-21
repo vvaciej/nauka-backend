@@ -29,26 +29,22 @@ export default function Register() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log('HANDLE SUBMIT');
-
     try {
-      console.log('PRZED FETCH');
-
-    const response = await fetch('/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        data: {
-          type: 'node--nauka_backend',
-          attributes: {
-            title: `${firstName} ${lastName}`,
-            field_imie: firstName,
-            field_nazwisko: lastName,
-            field_email: email,
-            field_password: password,
-          },
+			const response = await fetch('/api/register', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					data: {
+						type: 'node--nauka_backend',
+						attributes: {
+							title: `${firstName} ${lastName}`,
+							field_imie: firstName,
+							field_nazwisko: lastName,
+							field_email: email,
+							field_password: password,
+						},
         },
       }),
     });
@@ -59,7 +55,7 @@ export default function Register() {
       console.log(text);
     } catch (err) {
       console.error(err);
-    }
+    } 
   };
 
 	const emailValid = validateEmail(email);
