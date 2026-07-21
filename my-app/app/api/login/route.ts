@@ -23,14 +23,17 @@ export async function POST(req: Request) {
 			return Response.json({ error: 'Nieprawidłowe hasło.' }, { status: 401 });
 		}
 
-    console.log('✅ LOGOWANIE UDANE!');
-
 		// Sukces
 		return Response.json(
 			{
 				success: true,
 				message: 'Zalogowano pomyślnie!',
-				user: user.attributes,
+				user: {
+					id: user.id,
+					field_imie: user.attributes.field_imie,
+					field_nazwisko: user.attributes.field_nazwisko,
+					field_email: user.attributes.field_email,
+				},
 			},
 			{
 				status: 200,
