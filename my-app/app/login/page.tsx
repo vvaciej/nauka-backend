@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
+import Header from '../components/HeaderPage';
+import Login from '../components/LoginForm';
+
 export default function Register() {
 	const router = useRouter();
   const [email, setEmail] = useState('');
@@ -47,35 +50,10 @@ export default function Register() {
 	};
 
   return (
-		<div className='h-screen flex justify-center items-center bg-black'>
-			<div className='w-125 rounded-2xl bg-white p-8 shadow-xl'>
-				<h1 className='text-3xl font-bold text-center text-gray-700 mb-8'>Login to Account</h1>
-				<form onSubmit={handleSubmit} className='flex flex-col gap-5'>
-					<input
-						type='email'
-						placeholder='E-mail'
-						value={email}
-						onChange={e => setEmail(e.target.value)}
-						className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
-					/>
+		<div className="w-full min-h-screen bg-black flex flex-col gap-24">
+			<Header />
 
-					<input
-						type='password'
-						placeholder='Password'
-						value={password}
-						onChange={e => setPassword(e.target.value)}
-						className='border border-gray-300 rounded-lg px-4 py-3 text-gray-700 outline-none focus:border-blue-500'
-					/>
-					<button
-						type='submit'
-            disabled={!formValid}
-						className={`mt-4 rounded-lg py-3 text-white font-semibold transition-colors ${
-							formValid ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed'
-						}`}>
-						Login
-					</button>
-				</form>
-			</div>
+			<Login />
 		</div>
 	);
 }
