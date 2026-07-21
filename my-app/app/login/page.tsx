@@ -1,8 +1,10 @@
 'use client'
 
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
+	const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,7 +29,21 @@ export default function Register() {
 
 		const data = await response.json();
 
-		console.log(data);
+    if (response.ok) {
+			setEmail('');
+			setPassword('');
+
+			localStorage.setItem(
+				'user',
+				JSON.stringify({
+					email: data.user.field_email,
+				}),
+			);
+			
+			alert('Zalogowano pomyślnie!');
+
+			router.push('/');
+		}
 	};
 
   return (

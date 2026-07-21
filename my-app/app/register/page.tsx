@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Register() {
+	const router = useRouter();
 	useEffect(() => {
 		fetch('http://localhost/drupal10/jsonapi/node/nauka_backend')
 			.then(res => res.json())
@@ -64,10 +65,6 @@ export default function Register() {
 						}),	
 					});
 
-					const data = await response.json();
-
-					console.log(data);
-
 					if (response.ok) {
 						setFirstName('');
 						setLastName('');
@@ -76,6 +73,7 @@ export default function Register() {
 						setConfirmPassword('');
 
 						alert('Rejestracja zakończona sukcesem!');
+						router.push('/');
 					} else {
 						alert('Błąd podczas rejestracji.');
 					}
