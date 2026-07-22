@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
 		return Response.json(
 			{
-				error: 'Błąd serwera.',
+				error: error instanceof Error ? error.message : String(error),
 			},
 			{
 				status: 500,
