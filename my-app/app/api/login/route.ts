@@ -5,7 +5,7 @@ export async function POST(req: Request) {
 		const { email, password } = await req.json();
 
 		// Pobranie użytkowników z Drupala
-		const response = await fetch('http://localhost/drupal10/jsonapi/node/nauka_backend');
+		const response = await fetch('http://localhost/drupal10/web/jsonapi/node/klient');
 
 		const data = await response.json();
 

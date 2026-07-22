@@ -4,10 +4,15 @@ export async function PATCH(req: Request) {
 	try {
 		const { email, currentPassword, newPassword } = await req.json();
 
+		console.log('EMAIL:', email);
+
 		// Pobranie użytkowników z Drupala
-		const response = await fetch('http://localhost/drupal10/jsonapi/node/nauka_backend');
+		const response = await fetch('http://localhost/drupal10/web/jsonapi/node/klient');
 
 		const data = await response.json();
+
+		console.log(data);
+		console.log(data.data[0].attributes);
 
 		// Szukanie użytkownika
 		const user = data.data.find((item: any) => item.attributes.field_email === email);
@@ -29,7 +34,7 @@ export async function PATCH(req: Request) {
 		const hashedPassword = await bcrypt.hash(newPassword, 10);
 
 		// Aktualizacja w Drupalu
-		const updateResponse = await fetch(`http://localhost/drupal10/jsonapi/node/nauka_backend/${user.id}`, {
+		const updateResponse = await fetch(`http://localhost/drupal10/web/jsonapi/node/klient/${user.id}`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/vnd.api+json',
@@ -37,7 +42,7 @@ export async function PATCH(req: Request) {
 			},
 			body: JSON.stringify({
 				data: {
-					type: 'node--nauka_backend',
+					type: 'node--klient',
 					id: user.id,
 					attributes: {
 						field_password: hashedPassword,

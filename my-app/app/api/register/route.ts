@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 		body.data.attributes.field_password = hashedPassword;
 
 		// Wysłanie danych do Drupala
-		const response = await fetch('http://localhost/drupal10/jsonapi/node/nauka_backend', {
+		const response = await fetch(`${process.env.DRUPAL_BASE_URL}/jsonapi/node/klient`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/vnd.api+json',

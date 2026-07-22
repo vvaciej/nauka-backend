@@ -4,7 +4,7 @@ export async function PATCH(req: Request) {
 	try {
 		const { id, firstName, lastName, email } = await req.json();
 
-		const response = await fetch(`http://localhost/drupal10/jsonapi/node/nauka_backend/${id}`, {
+		const response = await fetch(`http://localhost/drupal10/web/jsonapi/node/klient/${id}`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/vnd.api+json',
@@ -12,7 +12,7 @@ export async function PATCH(req: Request) {
 			},
 			body: JSON.stringify({
 				data: {
-					type: 'node--nauka_backend',
+					type: 'node--klient',
 					id,
 					attributes: {
 						title: `${firstName} ${lastName}`,

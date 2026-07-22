@@ -30,6 +30,7 @@ export default function User() {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
+				email: user.email,
 				currentPassword,
 				newPassword,
 			}),
